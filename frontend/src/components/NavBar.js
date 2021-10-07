@@ -21,16 +21,17 @@ const NavBar = () => {
                 </li>
                 <li>
                     <Link to='/'>
-                        <i></i>
                         Shop
                     </Link>
                 </li>
             </ul>
             {/* hamburger  */}
-            <div className="hamburger__menu"></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div className="hamburger__menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            
         </nav>
     )
 }
