@@ -1,18 +1,23 @@
-const mongoose = require('mongoose');
-const Schema =  mongoose.Schema
+const {Schema,model} = require("mongoose");
 const bcrypt = require('bcrypt');
 
-//create Schema
-
-const UserSchema = new Schema({
-    name:{
-        type:String,
-        required:true
+const userSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    }, 
+    phoneNumber: {
+        type: String,
+        required: false,
     },
     email:{
         type: String,
         required: true,
         unique: true,
+    },
+    DOB: {
+        type: String,
+        required: false,
     },
     password:{
         type:String,
@@ -25,29 +30,64 @@ const UserSchema = new Schema({
     },
     pic:{
         type:String,
-        required:true,
+        required:false,
         default:""
     },
 },{
-    timestamp:true,//this will check when the user is created and updated
-}
-);
+        timestamp:true,//this will check when the user is created and updated
+});
+
+
+
+const orderSchema = new mongoose.Schema({
+    orderDate:{
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    }
+    ,
+    products: Object
+    // [{
+    //     _id:false,
+    //     id:{type: Schema.Types.name , ref:'Product'},
+    //     quantity:{
+    //         type:Number,
+    //         default:1
+    //     }
+    // }]
+    ,
+    subtotal:{
+        type: Number,
+        required: true
+    },
+    state:{
+        type:String,
+        required: true
+    }
+},{timestamp:true})
+
+
 // start an action below before save, update user with pre('save',)
-UserSchema.pre('save',async function(next){
+userSchema.pre('save',async function(next){
     //check password is modified before moving on to next callback
-    if(this.isModified('password')){
-        next()
+    if(!this.isModified('password')){
+        next();
     }
     // bcrypt functionality to encrypt password
-    const salt = await bcrypt.genSalt(10)
+    const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password,salt)
 })
 
 //decrypt the passworde
 //.methods create a method for the Schema which can be used with any child using the schema
-UserSchema.methods.matchPassword = async function (enteredPassword) {
+userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
-const User = mongoose.model('user', UserSchema)
-module.exports = User
+const Order = model("Order", orderSchema);
+const User = model("User", userSchema);
+module.exports = {User,Order}
