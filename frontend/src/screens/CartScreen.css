@@ -36,16 +36,16 @@
 }
 
 
-.cartscreen__info div button{
+.cartscreen__right div button{
     padding: 10px 17px;
-    width: 100px;
+    width: 100%;
     background-color: #171717;
     color: #f4f4f4;
     border: 1px solid #171717;
     cursor: pointer
 }
 
-.cartscreen__info div button{
+.cartscreen__right div button{
     opacity: 0.8;
 }
 

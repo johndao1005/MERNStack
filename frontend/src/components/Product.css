@@ -49,12 +49,6 @@
 }
 
 @media (max-width: 1232px) {
-    .homescreen__products{
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 1232px) {
     .product{
         width:360px;    }
 }
@@ -101,5 +95,5 @@
 
 @media (max-width: 400px) {
     .product{
-        width:350px;    }
+        width:300px;    }
 }
