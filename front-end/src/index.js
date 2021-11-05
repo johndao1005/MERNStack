@@ -1,30 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import {books} from './books'
+import Book from './Book'
 import './index.css'
 
-const books =[{
-  img:'https://',
-  title:'Love you',
-  author:'mommy'
-},{
-  author: 'John Doe',
-  title: 'Unknown',
-  img: 'http://'
-}]
 
 function BookList(){
   return <section>
-    {books}
+    {books.map((book) => {
+      return (
+        <Book key={book.id} {...book}>
+          
+        </Book>
+      )
+    })}
   </section>
 }
 
-const Book = ({img,title,author})=>{
-  return <article className="book">
-    <img src={img} alt='book'/>
-    <h1>{title}</h1>
-    <h4>{author}</h4>
-  </article>
-}
+
 
 ReactDOM.render(<BookList/>, document.getElementById('root'));
