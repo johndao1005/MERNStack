@@ -14,14 +14,13 @@ const registerUser = asyncHandler(async (req, res) => {
         const userExists = await User.findOne({ email: email })
         if (userExists) {
             res.status(400).json({ message:'User Already Exists'})
-        } else if (password.length <7) {
-            res.status(400).json({ message:'Password Is Incorrect'})
-        } else if (!re.test(email.trim())) {
-            res.status(400).json({ message:'Email Is Invalid'})
-        }else{
-            const newUser = await User.create(req.body)
-            res.status(201).json({message: "User is created successfully"})           
         }
+        const newUser = await User.create(req.body)
+        if(newUser){res.status(201).json({
+            _id:newUser._id,
+            JWT:generateToken(newUser.__id)
+        }) }          
+        
     } catch (e) {
         console.error(e);
         res.status(500).json({ message: "Register fail" })
@@ -59,8 +58,8 @@ const authUser = asyncHandler(async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email: email })
         if (user && (await user.matchPassword(password))) {
-            session = req.session;
-            req.session.email = email;
+            // session = req.session;
+            // req.session.email = email;
             if (user.isAdmin == true) {
                 req.session.type = "Admin"
                 res.status(2002).json({
@@ -68,12 +67,10 @@ const authUser = asyncHandler(async (req, res) => {
                 })
             }else {
                 req.session.type = "Customer";
-                res.status(202).json({
-                    message: `Welcome ${user.name}`
-                })
+                res.status(202).json(user)
             }
         } else {
-            res.status(406).json({ message: "Invalid username/password" })
+            res.json({ message: "Invalid username/password" })
         }
     } catch (e) {
         console.error(e);

@@ -1,0 +1,24 @@
+.main {
+    min-height: 93vh;
+    display: flex;
+    align-items: center;
+    /* background-image: '../..background1.jpg'; */
+    background-position: center;
+    background-size: cover;
+}
+
+.intro-text{
+    width: 100%;
+    text-align: center;
+}
+
+.buttonContainer{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.landingbutton{
+    width: 200px;
+    height:55px;
+}
