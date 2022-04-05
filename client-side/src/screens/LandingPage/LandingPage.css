@@ -1,0 +1,60 @@
+.main {
+    width: 100%;
+    display: flex;
+    background-image: '/background.png';
+    background-position: center;
+    background-size: cover;
+}
+
+.hero {
+    background-image: url(https://youmatter.world/app/uploads/sites/2/2019/11/tech-planet.jpg);
+    color: white;
+    width: 100%;
+    min-height: 400px;
+    opacity: 0.9;
+}
+
+.feature {
+    background: rgb(21, 140, 186);
+    color: white;
+}
+
+.center {
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.Landingbutton {
+    width: 200px;
+    height: 55px;
+}
+
+.product-card img {
+    max-height: 200px;
+    height:100%;
+    padding:1px;
+    margin:3x;
+}
+
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width:780px) {
+    .product-list {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width:580px) {
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+}
