@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/johndao1005/MERNStack/issues"
   },
-  "homepage": "https://github.com/johndao1005/MERNStack#readme"
+  "homepage": "https://github.com/johndao1005/MERNStack#readme",
+  "dependencies": {
+    "react-bootstrap": "^2.2.2"
+  }
 }
