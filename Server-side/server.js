@@ -4,7 +4,8 @@ require('dotenv').config();
 // import modules
 const express = require("express")
 const morgan = require("morgan")
-
+const cors = require("cors")
+const https = require("https");
 // Api routes
 const userRoutes = require("./routes/userRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
@@ -21,7 +22,8 @@ connectDB() //connect to database with base log in
 
 const app = express();// start an instance of the app
 
-
+app.use(cors());
+app.options("*", cors());
 // read json data and url code
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));

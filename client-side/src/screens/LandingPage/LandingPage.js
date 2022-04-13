@@ -3,16 +3,38 @@ import { Button, Row, Col, Container } from 'react-bootstrap'
 import './LandingPage.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { Card, Form } from 'react-bootstrap'
+import axios from 'axios'
 
 const LandingPage = () => {
     const navigator = useNavigate()
-    const [products, setProducts] = useState([])
-    const [token, setToken] = useState('')
 
-    const handleSubmitToken=()=>{
-        console.log(token)
-        navigator('/packages', { replace: true })
+    const [token, setToken] = useState('')
+    const [error, setError] = useState(null)
+    const handleSubmitToken = async(e) => {
+        e.preventDefault()
+        if (token.trim()===""){
+            setError("Please enter you voucher number")
+            return
+        }
+        try {
+            const config = {
+                headers: { 'Access-Control-Allow-Origin': '*' }
+            }
+            const response = await axios.post(
+                `http://localhost:5000/${token}`,config
+            )
+            
+            if(response.data.message === "The voucher is claimed or not exist"){
+                setError(response.data.message)
+            }else {
+                localStorage.setItem('token',token)
+                navigator('/packages', { replace: true })
+            }
+        } catch (e) {
+                console.log(e.message)
+        }
     }
+
     const heroSection = (
         <Row className='hero' id='hero'>
             <Col>
@@ -27,15 +49,23 @@ const LandingPage = () => {
                 <Card className="text-center mx-3 login">
                     <Card.Body>
                         <Card.Title>Claim your delivery packet</Card.Title>
-                        <Form onSubmit={(e)=>handleSubmitToken(e)}>
+                        <Form >
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Got a food voucher to claim ? Enter below</Form.Label>
-                                <Form.Control type="token" placeholder="Enter Code"/>
+                                {error && <Form.Text className="text-danger mb-2">
+                                    {error}
+                                </Form.Text>}
+                                <Form.Control
+                                    type="token"
+                                    value={token}
+                                    placeholder="Enter Your Token"
+                                    onChange={(e) => setToken(e.target.value)}
+                                />
                                 <Form.Text className="text-muted">
                                     Please reframe from sharing your voucher code <br /> as it can only be claimed once
                                 </Form.Text>
                             </Form.Group>
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" type="submit" onClick={(e) => handleSubmitToken(e)}>
                                 Claim your voucher
                             </Button>
                         </Form>
@@ -49,7 +79,7 @@ const LandingPage = () => {
                             <Link to='/login'>
                                 Login Portal
                             </Link>
-                            </Button>
+                        </Button>
                     </Card.Body>
                 </Card></Col>
         </Row>
@@ -64,7 +94,7 @@ const LandingPage = () => {
                         <Card.Body>
                             <Card.Title>Donators and Volunteers</Card.Title>
                             <Card.Text>
-                            Cupidatat ex enim anim labore nisi exercitation exercitation aliquip consequat nostrud pariatur nulla ut consequat.                            </Card.Text>
+                                Cupidatat ex enim anim labore nisi exercitation exercitation aliquip consequat nostrud pariatur nulla ut consequat.                            </Card.Text>
                             <Button variant="primary">Login Portal</Button>
                         </Card.Body>
                     </Card>
@@ -72,7 +102,7 @@ const LandingPage = () => {
                         <Card.Body>
                             <Card.Title>Donators and Volunteers</Card.Title>
                             <Card.Text>
-                            Cupidatat ex enim anim labore nisi exercitation exercitation aliquip consequat nostrud pariatur nulla ut consequat.                        </Card.Text>
+                                Cupidatat ex enim anim labore nisi exercitation exercitation aliquip consequat nostrud pariatur nulla ut consequat.                        </Card.Text>
                             <Button variant="primary">Login Portal</Button>
                         </Card.Body>
                     </Card>
@@ -80,7 +110,7 @@ const LandingPage = () => {
                         <Card.Body>
                             <Card.Title>Donators and Volunteers</Card.Title>
                             <Card.Text>
-                            Cupidatat ex enim anim labore nisi exercitation exercitation aliquip consequat nostrud pariatur nulla ut consequat.                            </Card.Text>
+                                Cupidatat ex enim anim labore nisi exercitation exercitation aliquip consequat nostrud pariatur nulla ut consequat.                            </Card.Text>
                             <Button variant="primary">Login Portal</Button>
                         </Card.Body>
                     </Card>

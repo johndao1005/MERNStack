@@ -8,9 +8,8 @@ import { Card } from 'react-bootstrap'
 const PackagesPage = () => {
   const [show, setShow] = useState(false);
   const navigator = useNavigate()
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
   const [packages, setPackages] = useState([])
+  const [error, setError] = useState(null)
 
   const getPackets = async () => {
     try {
@@ -21,9 +20,8 @@ const PackagesPage = () => {
         'http://localhost:5000/',
       )
       setPackages(response.data.packages)
-      console.log(response.data.packages)
-    } catch (error) {
-      console.log(error)
+    } catch (e) {
+      setError(e.message)
     }
   }
   useEffect(() => {
@@ -33,6 +31,27 @@ const PackagesPage = () => {
   const handleClose = () => {
     setShow(false)
     navigator('/', { replace: true })
+  }
+
+  const handleClaim = async() => {
+    const currentToken = localStorage.getItem('token')
+    console.log(currentToken)
+    try {
+      const config = {
+          headers: { 'Access-Control-Allow-Origin': '*' }
+      }
+      const response = await axios.get(
+          `http://localhost:5000/${currentToken}`,config
+      )
+      console.log(response.data)
+      if(response.data.message === "The voucher is claimed or not exist"){
+        setError(response.data.response)
+      }else{
+        setShow(true)
+      }
+  } catch (e) {
+          setError(e.message)
+  }
   }
 
   const packageList = (
@@ -47,7 +66,7 @@ const PackagesPage = () => {
             <Card.Text as='h5'>Including :</Card.Text>
             <Card.Text as='p'>- 2 x eggs<br/>- 3 cucumbers</Card.Text>
             <Card.Link>
-              <Button className="mr-2" onClick={()=>setShow(true)}>
+              <Button className="mr-2" onClick={()=>handleClaim(product._id)}>
                 Claim this package
               </Button>
             </Card.Link>
@@ -78,7 +97,7 @@ const PackagesPage = () => {
     </Modal>
   )
   return (
-    <Container className='mb-5'>
+    <Container id="packages" className='mb-5'>
       <h1 className='center py-5'>Packages list</h1>
       {packageList}
       {modalConfirm}

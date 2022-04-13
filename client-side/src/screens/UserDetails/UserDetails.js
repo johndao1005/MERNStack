@@ -80,7 +80,7 @@ function UserDetails() {
         </Form>
     )
     return (
-        <div className='text-center'>
+        <div id="details" className='text-center'>
             {detailForm}
         </div>
     )
