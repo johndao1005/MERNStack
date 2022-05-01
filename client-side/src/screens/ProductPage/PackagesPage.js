@@ -17,7 +17,7 @@ const PackagesPage = () => {
         headers: { 'Access-Control-Allow-Origin': '*' }
       }
       const response = await axios.get(
-        'http://localhost:5000/',
+        'http://localhost:5000/transaction/',
       )
       setPackages(response.data.packages)
     } catch (e) {
@@ -41,13 +41,14 @@ const PackagesPage = () => {
           headers: { 'Access-Control-Allow-Origin': '*' }
       }
       const response = await axios.get(
-          `http://localhost:5000/${currentToken}`,config
+          `http://localhost:5000/transaction/${currentToken}`,config
       )
       console.log(response.data)
       if(response.data.message === "The voucher is claimed or not exist"){
         setError(response.data.response)
       }else{
         setShow(true)
+        localStorage.removeItem('token')
       }
   } catch (e) {
           setError(e.message)

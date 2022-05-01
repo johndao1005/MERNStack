@@ -3,7 +3,7 @@ const usersData = [{
         name: "john.dao",
         password: "Dao",
         phoneNumber: 315464,
-        email: "joo1@gmail.com",
+        email: "joo1@gmail.com"
     },
     {
         name: "Kelvin",

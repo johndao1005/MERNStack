@@ -10,6 +10,7 @@ const LandingPage = () => {
 
     const [token, setToken] = useState('')
     const [error, setError] = useState(null)
+    
     const handleSubmitToken = async(e) => {
         e.preventDefault()
         if (token.trim()===""){

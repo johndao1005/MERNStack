@@ -42,7 +42,7 @@ app.use(function (req, res, next) {
 
 // Routes list
 app.use("/user", userRoutes)
-app.use("/", transactionRoutes)
+app.use("/transaction", transactionRoutes)
 
 
 const PORT = process.env.PORT || 3000 // if reading .env file fail => running on port 3000
