@@ -7,22 +7,25 @@ import axios from 'axios'
 
 const LandingPage = () => {
     const navigator = useNavigate()
-
     const [token, setToken] = useState('')
     const [error, setError] = useState(null)
     
     const handleSubmitToken = async(e) => {
         e.preventDefault()
+        //check empty field and remove current error
         if (token.trim()===""){
             setError("Please enter you voucher number")
             return
+        } else{
+            setError('')
         }
         try {
+            // allow CORS request to go throuhg
             const config = {
                 headers: { 'Access-Control-Allow-Origin': '*' }
             }
             const response = await axios.post(
-                `http://localhost:5000/${token}`,config
+                `http://localhost:5000/transaction/${token}`,config
             )
             
             if(response.data.message === "The voucher is claimed or not exist"){
@@ -32,7 +35,7 @@ const LandingPage = () => {
                 navigator('/packages', { replace: true })
             }
         } catch (e) {
-                console.log(e.message)
+            setError(e.message)
         }
     }
 

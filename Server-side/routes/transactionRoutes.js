@@ -7,7 +7,6 @@ const {
     createToken
 } = require("../controller/transactionController")
 
-
 router.get('/', getPackageList);
 
 router.post('/create', createToken);

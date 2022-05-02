@@ -6,6 +6,7 @@ const asyncHandler = require('express-async-handler');
 const registerUser = asyncHandler(async (req, res) => {
     try{
         const { name, email, password } = req.body
+        console.log(name, email, password)
         const userExists = await User.findOne({ email })
     
         if (userExists) {
@@ -80,7 +81,7 @@ const authUser = asyncHandler(async (req, res) => {
     try{
         const { email, password } = req.body
         const user = await User.findOne({ email })
-        if (user && (await user.matchPassword(password))) {
+        if (user && password === user.password){//(await user.matchPassword(password))) {
             res.json({
                 _id: user._id,
                 name: user.name,

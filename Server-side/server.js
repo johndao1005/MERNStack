@@ -9,7 +9,7 @@ const https = require("https");
 // Api routes
 const userRoutes = require("./routes/userRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
-
+bodyParser = require('body-parser');
 //import middleware to handle error
 //const{notFound,errorHandler}= require("./middleware/errorMiddleware")
 
@@ -21,8 +21,9 @@ const connectDB = require("./config/db")
 connectDB() //connect to database with base log in
 
 const app = express();// start an instance of the app
-
-app.use(cors());
+// Setting up basic middleware for all Express requests
+app.use(bodyParser.urlencoded({ extended: false })); // Parses urlencoded bodies
+app.use(bodyParser.json()); // Send JSON responsesapp.use(cors());
 app.options("*", cors());
 // read json data and url code
 app.use(express.json())
