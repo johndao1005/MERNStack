@@ -32,10 +32,11 @@ function RegisterForm() {
                 },
                 config
             )
-            // navigator('/user', { replace: true })
             console.log(data)
             if (data.error) {
                 throw new Error(data.error)
+            } else{
+                navigator('/user', { replace: true })
             }
         } catch (e) {
             setError(e.message)
