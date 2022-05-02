@@ -4,20 +4,22 @@ const asyncHandler = require('express-async-handler');
 //ANCHOR User side 
 // Register new users
 const registerUser = asyncHandler(async (req, res) => {
-    try{
+    try {
         const { name, email, password } = req.body
         const userExists = await User.findOne({ email })
-    
+
         if (userExists) {
             throw new Error('User already exists')
         }
-    
+
         const newUser = await User.create({
             name,
             email,
-            password
+            password,
+            phone: "",
+            address: "",
         })
-    
+
         if (newUser) {
             res.status(201).json({
                 _id: newUser._id,
@@ -28,10 +30,10 @@ const registerUser = asyncHandler(async (req, res) => {
         } else {
             throw new Error('Invalid user data')
         }
-    } catch(e){
+    } catch (e) {
         res.json(e.message)
     }
-    
+
 })
 
 //find 1 user with Id
@@ -42,7 +44,8 @@ const userDetail = asyncHandler(async (req, res) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
+            address: user.address,
+            phone: user.phone
         })
     } else {
         res.status(404)
@@ -56,17 +59,20 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     if (user) {
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email
-        
-        if (req.body.password) {
-            user.password = req.body.password
-        }
+        user.phone = req.body.phone || user.phone
+        user.address = req.body.address || user.address
+        user.password = req.body.password || user.password
+
 
         const updatedUser = await user.save()
+
         res.json({
             _id: updatedUser._id,
             name: updatedUser.name,
             email: updatedUser.email,
-            isAdmin: updatedUser.isAdmin,
+            address: updatedUser.email,
+            email: updatedUser.email,
+            phone: updatedUser.phone,
         })
     } else {
         res.status(404)
@@ -77,10 +83,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
 //Check user log in
 const authUser = asyncHandler(async (req, res) => {
-    try{
+    try {
         const { email, password } = req.body
         const user = await User.findOne({ email })
-        if (user && password === user.password){//(await user.matchPassword(password))) {
+        if (user && password === user.password) {//(await user.matchPassword(password))) {
             res.json({
                 _id: user._id,
                 name: user.name,
@@ -90,8 +96,8 @@ const authUser = asyncHandler(async (req, res) => {
         } else {
             throw new Error('Invalid email or password')
         }
-    } catch(e){
-        res.json({error:e.message})
+    } catch (e) {
+        res.json({ error: e.message })
     }
 })
 

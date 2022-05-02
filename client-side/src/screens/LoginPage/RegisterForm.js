@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
 
 function RegisterForm() {
     const [email, setEmail] = useState('')
@@ -9,6 +10,7 @@ function RegisterForm() {
     const [name, setName] = useState('')
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(false)
+    let navigator = useNavigate()
 
     const registerHandler = async (e) => {
         e.preventDefault()
@@ -32,10 +34,10 @@ function RegisterForm() {
                 },
                 config
             )
-            console.log(data)
             if (data.error) {
                 throw new Error(data.error)
             } else{
+                localStorage.setItem('_id',data._id)
                 navigator('/user', { replace: true })
             }
         } catch (e) {

@@ -26,18 +26,18 @@ function LoginForm() {
             const config = {
                 headers: { 'Access-Control-Allow-Origin': '*' }
             }
-            console.log(email,password)
             const {data} = await axios.post(
                 `http://localhost:5000/user/login/`,
                 { email, password }
                 , config
             )
-
+            console.log(data)
             if(data.error){
                 throw new Error(data.error)
-            }else (
+            }else {
+                localStorage.setItem('_id',data._id)
                 navigator('/user', { replace: true })
-            )
+            }
         } catch (e) {
             seterror(e.message)
         }
