@@ -26,7 +26,7 @@ function LoginForm() {
             const config = {
                 headers: { 'Access-Control-Allow-Origin': '*' }
             }
-            const response = await axios.get(
+            const {data} = await axios.get(
                 `http://localhost:5000/user/login/`,
                 { email: emailLogin, 
                 password: passwordLogin }
@@ -34,10 +34,10 @@ function LoginForm() {
             )
 
             // navigator('/user', { replace: true })
-            if(response.data.error){
-                throw new Error(response.data.error)
+            if(data.error){
+                throw new Error(data.error)
             }else (
-                console.log('success')
+                console.log(data)
             )
         } catch (e) {
             setErrorLogin(e.message)

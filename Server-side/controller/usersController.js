@@ -6,25 +6,24 @@ const asyncHandler = require('express-async-handler');
 const registerUser = asyncHandler(async (req, res) => {
     try{
         const { name, email, password } = req.body
-        console.log(name, email, password)
         const userExists = await User.findOne({ email })
     
         if (userExists) {
             throw new Error('User already exists')
         }
     
-        const user = await User.create({
+        const newUser = await User.create({
             name,
             email,
-            password,
+            password
         })
     
-        if (user) {
+        if (newUser) {
             res.status(201).json({
-                _id: user._id,
-                name: user.name,
-                email: user.email,
-                isAdmin: user.isAdmin,
+                _id: newUser._id,
+                name: newUser.name,
+                email: newUser.email,
+                isAdmin: newUser.isAdmin,
             })
         } else {
             throw new Error('Invalid user data')

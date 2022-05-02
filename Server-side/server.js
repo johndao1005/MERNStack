@@ -9,7 +9,7 @@ const https = require("https");
 // Api routes
 const userRoutes = require("./routes/userRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
-bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 //import middleware to handle error
 //const{notFound,errorHandler}= require("./middleware/errorMiddleware")
 

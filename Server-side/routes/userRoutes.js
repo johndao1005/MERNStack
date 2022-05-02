@@ -10,7 +10,7 @@ const {
 
 router.get('/login', authUser);
 
-router.get('/register', registerUser);
+router.post('/register', registerUser);
 
 router
   .route('/profile/:id')
