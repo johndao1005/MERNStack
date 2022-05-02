@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Row, Col, Container } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Button, Row, Col } from 'react-bootstrap'
 import './LandingPage.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { Card, Form } from 'react-bootstrap'
 import axios from 'axios'
 
+/**
+first page where user can enter the pages which allow user to enter token or login */
 const LandingPage = () => {
     const navigator = useNavigate()
     const [token, setToken] = useState('')
     const [error, setError] = useState(null)
-    
-    const handleSubmitToken = async(e) => {
+
+    const handleSubmitToken = async (e) => {
         e.preventDefault()
         //check empty field and remove current error
-        if (token.trim()===""){
+        if (token.trim() === "") {
             setError("Please enter you voucher number")
             return
-        } else{
+        } else {
             setError('')
         }
         try {
@@ -24,14 +26,15 @@ const LandingPage = () => {
             const config = {
                 headers: { 'Access-Control-Allow-Origin': '*' }
             }
+            // using post request to check if the token is used
             const response = await axios.post(
-                `http://localhost:5000/transaction/${token}`,config
+                `http://localhost:5000/transaction/${token}`, config
             )
-            
-            if(response.data.message === "The voucher is claimed or not exist"){
+
+            if (response.data.message === "The voucher is claimed or not exist") {
                 setError(response.data.message)
-            }else {
-                localStorage.setItem('token',token)
+            } else {
+                localStorage.setItem('token', token)
                 navigator('/packages', { replace: true })
             }
         } catch (e) {
@@ -39,6 +42,7 @@ const LandingPage = () => {
         }
     }
 
+    //seperate page components for easier maintain and display
     const heroSection = (
         <Row className='hero' id='hero'>
             <Col>
@@ -79,10 +83,8 @@ const LandingPage = () => {
                         <Card.Text>
                             Are you looking to be a part of the team<br /> or contribute to the community ? Enter bellow
                         </Card.Text>
-                        <Button variant="primary">
-                            <Link to='/login'>
-                                Login Portal
-                            </Link>
+                        <Button variant="primary" onClick={() => navigator('/login')}>
+                            Login Portal
                         </Button>
                     </Card.Body>
                 </Card></Col>
@@ -139,6 +141,7 @@ const LandingPage = () => {
             </Col>
         </>
     )
+    
     return (
         <>
             {heroSection}

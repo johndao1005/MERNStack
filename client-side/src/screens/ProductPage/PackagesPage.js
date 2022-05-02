@@ -11,6 +11,7 @@ const PackagesPage = () => {
   const [packages, setPackages] = useState([])
   const [error, setError] = useState(null)
 
+  // using get request to get all the available data in package collection
   const getPackets = async () => {
     try {
       const config = {
@@ -24,6 +25,8 @@ const PackagesPage = () => {
       setError(e.message)
     }
   }
+
+  // using use effect to get the packages data when the component first load.
   useEffect(() => {
     getPackets()
   }, [])
@@ -97,6 +100,7 @@ const PackagesPage = () => {
       </Modal.Footer>
     </Modal>
   )
+
   return (
     <Container id="packages" className='mb-5'>
       <h1 className='center py-5'>Packages list</h1>

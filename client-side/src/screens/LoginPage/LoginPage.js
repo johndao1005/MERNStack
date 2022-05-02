@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import { Container } from 'react-bootstrap'
 import './LoginPage.css'
 import { Tabs } from 'react-bootstrap'
 import { Tab } from 'react-bootstrap'
@@ -10,6 +8,7 @@ import RegisterForm from './RegisterForm'
 
 const LoginPage = () => {
 
+    // seperate 2 forms in seperate files to maintain and control state and request
     const tabCard = (
         <Card>
             <Tabs defaultActiveKey="Login" className="mb-3">
@@ -22,6 +21,7 @@ const LoginPage = () => {
             </Tabs>
         </Card> 
     );
+
     return (
         <>
             <Container id="login" className="my-5 mx-auto center w-50">

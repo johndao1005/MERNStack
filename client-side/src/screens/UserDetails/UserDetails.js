@@ -17,6 +17,7 @@ function UserDetails() {
     const id = localStorage.getItem('_id')
     let navigator = useNavigate()
 
+    //get user data when first load the component
     useEffect(() => {
         getData()
     }, [])

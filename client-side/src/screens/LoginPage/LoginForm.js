@@ -45,7 +45,7 @@ function LoginForm() {
   return (
     <>
             <h1 className='mt-5'>Login</h1>
-            <Form className='p-3' onSubmit={loginHandler}>
+            <Form id='login' className='p-3' onSubmit={loginHandler}>
                 <Form.Group className="mb-3 start" controlId="formBasicEmail">
                     {loading && <p>Loading</p>}
                     {error && <p>{error}</p>}
