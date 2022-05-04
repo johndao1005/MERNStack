@@ -8,7 +8,7 @@
 
 - create a `.env` file at the root level and add the following details
 
-![image-20220502195631771](.\src\image-20220502195631771.png)
+![image-20220502195631771](./src/image-20220502195631771.png)
 
 ```javascript
 PORT = <port number you prefer. can be any port besides 3000 as it is used by the backend server>
