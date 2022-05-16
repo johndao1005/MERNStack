@@ -8,7 +8,7 @@
 
 - create a `.env` file at the root level and add the following details
 
-![image-20220502195631771](.\src\image-20220502195631771.png)
+![image-20220502195631771](./src/image-20220502195631771.png)
 
 ```javascript
 PORT = <port number you prefer. can be any port besides 3000 as it is used by the backend server>
@@ -18,7 +18,7 @@ NODE_ENV = development
 
 - upload first-hand data to create existing data and collection on Mongodb by run `node ./Server-side/seeder/seeder.js` the premade data is stored in `/Server-side/data` which can be used to get the currently available token in the `tokenData.js`
 
-![image-20220502195617801](.\src\image-20220502195617801.png)
+![image-20220502195617801](./src/image-20220502195617801.png)
 
 - In case `.env` file failed to connect, please add the MongoURI directly in `./Server-side/config/db.js` by replacing `process.env.MONGO_URI` with user's Mongo URI
 
