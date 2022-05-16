@@ -24,6 +24,10 @@ NODE_ENV = development
 
 ### Start the application
 
+- At the root level please run `npm run seeder` to generate dummy data.
+
+### Start the application
+
 - At the root level please run `npm run dev` to start both backend and front end
 - the token will allow user to recieve the package once so after select a package the status will update and prevent user from using expried token
 - User can change details afterward and logout.besidesan

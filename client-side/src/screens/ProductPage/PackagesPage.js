@@ -55,7 +55,7 @@ const PackagesPage = () => {
       }
   } catch (e) {
           setError(e.message)
-  }
+    }
   }
 
   const packageList = (
