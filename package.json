@@ -4,7 +4,7 @@
   "description": "learn to create a e-com website through tutorial",
   "main": "index.js",
   "scripts": {
-    "seeder":"node ./Server-side/seeder/seeder.js",
+    "seeder": "node ./Server-side/seeder/seeder.js",
     "start": "nodemon ./Server-side/server.js",
     "server": "nodemon Server-side/server.js --ignore client",
     "client": "npm start --prefix client-side",

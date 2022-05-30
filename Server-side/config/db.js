@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 //Show the connection state with database connection
 
 const connectDB = async(mongoURI=process.env.MONGO_URI) => {
+    console.log(process.env.MONGO_URI)
     try {
         mongoose.connect(mongoURI, {
             useNewUrlParser: true,
