@@ -3,7 +3,7 @@ import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
 const { Title } = Typography;
 function Navbar() {
-  const [current, setCurrent] = useState("mail");
+  const [current, setCurrent] = useState("");
   const items = [
     {
       label: <a href="/#about">About</a>,
@@ -14,11 +14,11 @@ function Navbar() {
       key: "mission",
     },
     {
-      label: <a href="/#policy">Policy</a>,
+      label: <a href="/#footer">Contact</a>,
       key: "policy",
     },
     {
-      label: <a href="/user">Login</a>,
+      label: <a href="/login">Login</a>,
       key: "login",
       icon: <UserOutlined />,
     },
@@ -30,22 +30,20 @@ function Navbar() {
 
   return (
     <Row>
-      <Col span={8}>
+      <Col  xs={0} sm={10} md={8} lg={8} xl={8}>
         <a href="/">
           <Title style={{ maxWidth: 200, marginTop: 10 }}> Kai Rescue</Title>
         </a>
       </Col>
-      <Col span={16}>
+      <Col  xs={24} sm={14} md={16} lg={16} xl={16}>
+        <Row justify="end">
         <Menu
-          style={{
-            float: "right",
-            minWidth: 400,
-          }}
           onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
           items={items}
         />
+        </Row>
       </Col>
     </Row>
   );

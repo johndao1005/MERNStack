@@ -1,8 +1,9 @@
-import axios from 'axios'
-import React, { useState } from 'react'
-import { Button } from 'react-bootstrap'
-import { Form } from 'react-bootstrap'
-import { useNavigate } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
+import { Form, Input, Button, Col, Row, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
+
+const {Title} = Typography
 
 function RegisterForm() {
     const [email, setEmail] = useState('')
@@ -46,38 +47,73 @@ function RegisterForm() {
     }
     return (
         <>
-            <h1 className='mt-5'>Register</h1>
-            <Form className='p-3' onSubmit={registerHandler}>
-                {loading && <p>Loading</p>}
-                {error && <p>{error}</p>}
-                <Form.Group className="mb-3 start" controlId="formBasicEmail">
-                    <Form.Label>User name</Form.Label>
-                    <Form.Control
-                        type="name"
-                        value={name}
-                        placeholder="Name"
-                        onChange={(e) => setName(e.target.value)} />
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        value={email}
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)} />
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)} />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-        </>
+      <Title style={{marginTop:10, marginBottom: 19}} level={3}>Register</Title>
+      <Form
+        name="login"
+        labelCol={{
+          span: 8,
+        }}
+        wrapperCol={{
+          span: 16,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={registerHandler}
+        autoComplete="off"
+      >
+          <Form.Item
+          label="Username"
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },{type:"email", message: "Please enter correct email address"}
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Email Address"
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Please input your username!",
+            },{type:"email", message: "Please enter correct email address"}
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+            { min: 8, message: "Password must be minimum 8 characters." },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          wrapperCol={{
+            offset: 8,
+            span: 16,
+          }}
+        >
+          <Button className="center" type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+      <Row justify="center" className="my-3">
+        <Col>New User ? Please go to Register tab</Col>
+      </Row>
+    </>
     )
 }
 

@@ -3,3 +3,12 @@
     flex-direction: column;
     margin: 20px;
 }
+.hero {
+    background-image: url(https://cdn.shopify.com/s/files/1/0561/0645/1106/products/C8BB88F8-5D65-453A-8A2A-272E64DDEC56_1_201_a.jpg?v=1621216017&width=1946);
+    width: 100%;
+    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+    min-height: 450px;
+    opacity: 0.9;
+}
