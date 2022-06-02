@@ -19,9 +19,9 @@ function FooterBar() {
       <Col style={{ paddingLeft: 40 }} xs={12} sm={12} md={8} lg={8} xl={8}>
         <Space direction="vertical" size="middle">
           <div>Phone number</div>
-          <a href="/">123456789</a>
+          <a href="tel:+642040784967">020 4078 4967</a>
           <div>Email</div>
-          <a href="/">kairescue@gmail.com</a>
+          <a href="mailto:kairescue@nec.org.nz">kairescue@gmail.com</a>
           <div>Social Account</div>
           <Space>
             <a>Facebook</a>
@@ -30,11 +30,13 @@ function FooterBar() {
         </Space>
       </Col>
       <Col style={{ paddingLeft: 40 }} xs={12} sm={12} md={8} lg={8} xl={8}>
-        <Space direction="vertical" size="middle" >
-          <div>Address 1: </div>
-          <div>123 Queen st, Nelson</div>
-          <div>Address 2: </div>
-          <div>567 King st, Stoke</div>
+        <Space direction="vertical" size="middle">
+          <h3>Kai Rescue: </h3>
+          <div>
+            30 Trafalgar Street,<br/> The Wood, Nelson 7010
+          </div>
+          <h3>Nelson environment centre: </h3>
+          <div>6 Vivian Place,<br/> Annesbrook 7011</div>
         </Space>
       </Col>
     </Row>

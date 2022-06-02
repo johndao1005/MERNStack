@@ -97,11 +97,11 @@ function LoginForm() {
         </Form.Item>
         <Form.Item
           wrapperCol={{
-            offset: 8,
-            span: 16,
+            offset: 0,
+            span: 15,
           }}
         >
-          <Button className="center" type="primary" htmlType="submit">
+          <Button style={{minWidth: 350}} type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>

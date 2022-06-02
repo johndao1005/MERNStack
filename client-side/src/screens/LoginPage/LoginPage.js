@@ -3,8 +3,8 @@ import { LogoutOutlined, UserAddOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
 import Navbar from "../../components/Navbar";
 
 const { Header, Footer, Content } = Layout;
@@ -32,7 +32,7 @@ const LoginPage = () => {
   // seperate 2 forms in seperate files to maintain and control state and request
   const tabCard = (
     <Row justify="center">
-      <Card style={{ marginTop: 200, minWidth: 380 }}>
+      <Card style={{ marginTop: 150, minWidth: 380 }}>
       <Row justify="center">
         <Menu
           style={{ minWidth: 200, padding: 10 }}

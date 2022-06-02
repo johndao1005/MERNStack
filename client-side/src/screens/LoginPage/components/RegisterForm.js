@@ -13,8 +13,8 @@ function RegisterForm() {
     const [loading, setLoading] = useState(false)
     let navigator = useNavigate()
 
-    const registerHandler = async (e) => {
-        e.preventDefault()
+    const registerHandler = async () => {
+        setLoading(true)
         if (name.trim().length === 0 ||
             email.trim().length === 0 ||
             password.trim().length === 0) {
@@ -39,10 +39,12 @@ function RegisterForm() {
                 throw new Error(data.error)
             } else{
                 localStorage.setItem('_id',data._id)
+                setLoading(false)
                 navigator('/user', { replace: true })
             }
         } catch (e) {
             setError(e.message)
+            setLoading(false)
         }
     }
     return (
@@ -101,11 +103,11 @@ function RegisterForm() {
         </Form.Item>
         <Form.Item
           wrapperCol={{
-            offset: 8,
-            span: 16,
+            offset: 0,
+            span: 15,
           }}
         >
-          <Button className="center" type="primary" htmlType="submit">
+          <Button loading={loading} style={{minWidth: 350}} type="primary" htmlType="submit">
             Submit
           </Button>
         </Form.Item>
