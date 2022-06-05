@@ -2,29 +2,23 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
   Layout,
-  Menu,
-  Button,
-  Form,
   Col,
   Row,
   Typography,
-  Space,
   Avatar,
 } from "antd";
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { LogoutOutlined } from "@ant-design/icons";
-import MemberScreen from "../Member/MemberScreen";
-import DonatorScreen from "../Donator/DonatorScreen";
+
 const { Header, Sider, Content } = Layout;
 const { Title } = Typography;
-function DashBoard() {
+
+function DashBoardLayout(props) {
   const [collapsed, setCollapsed] = useState(false);
   const [member, setMember] = useState(null);
   const id = localStorage.getItem("_id");
@@ -92,65 +86,6 @@ function DashBoard() {
   //     console.log(error)
   //   }
   // };
-
-  const detailForm = () => {};
-  // <Form className='mx-auto my-5 w-50' onSubmit={(e) => handleSubmit(e)}>
-  //     <Form.Text as={'h1'}>User Details</Form.Text>
-  //     <Button className='my-2' onClick={() => { setEdit(!edit) }}>Edit User details</Button>
-  //     <fieldset disabled={!edit}>
-  //         <Form.Group controlId="name">
-  //             <Form.Label>Name</Form.Label>
-  //             <Form.Control
-  //                 type="name"
-  //                 value={name}
-  //                 placeholder="Enter Name"
-  //                 onChange={(e) => setName(e.target.value)}>
-  //             </Form.Control>
-  //         </Form.Group>
-  //         <Form.Group controlId="email">
-  //             <Form.Label>Email</Form.Label>
-  //             <Form.Control
-  //                 type="email"
-  //                 value={email}
-  //                 placeholder="Enter Your Email"
-  //                 onChange={(e) => setEmail(e.target.value)}>
-  //             </Form.Control>
-  //         </Form.Group>
-
-  //         <Form.Group controlId="password">
-  //             <Form.Label>Password</Form.Label>
-  //             <Form.Control
-  //                 type="password"
-  //                 value={password}
-  //                 placeholder="Enter Password"
-  //                 onChange={(e) => setPassword(e.target.value)}>
-  //             </Form.Control>
-  //         </Form.Group>
-
-  //         <Form.Group controlId="phone">
-  //             <Form.Label>Phone number</Form.Label>
-  //             <Form.Control
-  //                 type="phone"
-  //                 value={phone}
-  //                 placeholder="Enter Phone Number"
-  //                 onChange={(e) => setPhone(e.target.value)}>
-  //             </Form.Control>
-  //         </Form.Group>
-
-  //         <Form.Group controlId="address">
-  //             <Form.Label>Address</Form.Label>
-  //             <Form.Control
-  //                 type="address"
-  //                 value={address}
-  //                 placeholder="Enter address"
-  //                 onChange={(e) => setAddress(e.target.value)}>
-  //             </Form.Control>
-  //         </Form.Group>
-  //         {edit && <Button className='m-3' type="submit">
-  //             Update
-  //         </Button>}
-  //     </fieldset>
-  // </Form>
 
   return (
     <Layout
@@ -229,11 +164,12 @@ function DashBoard() {
         </Row>
       </Header>
       <Content>
-        {member === true ? (
+        {props.children}
+        {/* {member === true ? (
           <MemberScreen collapsed={collapsed} />
         ) : (
           <DonatorScreen collapsed={collapsed} />
-        )}
+        )} */}
       </Content>
       {/* <div className='m-5 row'>
                 <h1 className='mx-2'>Welcome User</h1>
@@ -246,4 +182,4 @@ function DashBoard() {
   );
 }
 
-export default DashBoard;
+export default DashBoardLayout;

@@ -59,6 +59,7 @@ function Mission() {
           {informationCard.map((card) => {
             return (
               <Col key={card.label} xs={24} sm={12} md={8} lg={8} xl={6}>
+                <Row justify="center">
                 <Card
                   style={{ height: 300, paddingBottom: 60, width: 240 }}
                   className="smallCard p-3 m-2"
@@ -75,6 +76,7 @@ function Mission() {
                     {card.button}
                   </Col>
                 </Card>
+                </Row>
               </Col>
             );
           })}

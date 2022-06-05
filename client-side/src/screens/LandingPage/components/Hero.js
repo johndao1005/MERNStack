@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Button, Card, Col, Form, Input, Row, Space, Typography } from "antd";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const { Title } = Typography;
+
 function Hero() {
   const [token, setToken] = useState("");
   const [error, setError] = useState(null);
-
+  const navigator = useNavigate();
+  
   const handleSubmitToken = async (e) => {
     e.preventDefault();
     //check empty field and remove current error
@@ -67,8 +70,8 @@ function Hero() {
             <Space direction="vertical" size="middle">
               <Title level={4}>Claim your delivery packet</Title>
               <Form>
-                <span>Got a food voucher to claim ? Enter below</span>
-                {error && <span className="text-danger mb-2">{error}</span>}
+                <span>Got a food voucher to claim ? Enter below</span> <br/>
+                
                 <Input
                   style={{ maxWidth: 300, marginTop: 10, marginBottom: 10 }}
                   type="string"
@@ -76,8 +79,9 @@ function Hero() {
                   placeholder="Enter Your Token"
                   onChange={(e) => setToken(e.target.value)}
                 />
+                {error && <span style={{color: "red"}}>{error}</span>}
                 <div className="text-muted">
-                  Please reframe from sharing your voucher code <br /> as it can
+                  Please reframe from sharing your voucher code as it can
                   only be claimed once
                 </div>
                 <Button

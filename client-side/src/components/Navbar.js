@@ -1,6 +1,8 @@
 import { Menu, Typography, Col, Row } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { useState } from "react";
+import {  Link } from "react-router-dom";
+
 const { Title } = Typography;
 function Navbar() {
   const [current, setCurrent] = useState("");
@@ -18,7 +20,7 @@ function Navbar() {
       key: "policy",
     },
     {
-      label: <a href="/login">Login</a>,
+      label: <Link to="/login">Login</Link>,
       key: "login",
       icon: <UserOutlined />,
     },
@@ -31,9 +33,9 @@ function Navbar() {
   return (
     <Row>
       <Col  xs={0} sm={10} md={8} lg={8} xl={8}>
-        <a href="/">
+        <Link to="/">
           <Title style={{ maxWidth: 200, marginTop: 10 }}> Kai Rescue</Title>
-        </a>
+        </Link>
       </Col>
       <Col  xs={24} sm={14} md={16} lg={16} xl={16}>
         <Row justify="end">

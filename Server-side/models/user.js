@@ -7,6 +7,11 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    userType :{
+        type: String,
+        required: true,
+        default: "donator"
+    },
     phone: {
         type: String,
         required: false,
@@ -27,11 +32,6 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true
-    },
-    isAdmin: {
-        type: Boolean,
-        required: true,
-        default: false
     },
 }, {
     timestamp: true,//this will check when the user is created and updated

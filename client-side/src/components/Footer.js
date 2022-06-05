@@ -1,14 +1,14 @@
 import { Typography, Col, Row, Space } from "antd";
-
+import { Link } from "react-router-dom";
 const { Title } = Typography;
 
 function FooterBar() {
   return (
-    <Row id="footer">
+    <Row id="footer" style={{backgroundColor: "white", margin: 0,padding : "20px 10px", width: "100%"}}>
       <Col style={{ textAlign: "center" }} xs={0} sm={0} md={8} lg={8} xl={8}>
-        <a href="/">
+        <Link to="/">
           <Title> Kai Rescue</Title>
-        </a>
+        </Link>
         <Title level={5}>@ Copyright by John Dao 2022</Title>
         <Space size={"large"} style={{ marginTop: 40 }}>
           <a href="/#about">About</a>
@@ -24,8 +24,8 @@ function FooterBar() {
           <a href="mailto:kairescue@nec.org.nz">kairescue@gmail.com</a>
           <div>Social Account</div>
           <Space>
-            <a>Facebook</a>
-            <a>Twitter</a>
+            <a >Facebook</a>
+            <a >Twitter</a>
           </Space>
         </Space>
       </Col>

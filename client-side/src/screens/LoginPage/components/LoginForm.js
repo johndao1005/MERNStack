@@ -31,7 +31,7 @@ function LoginForm() {
         config
       );
       console.log(data);
-      if (data.error) {
+      if (data.error || data) {
         throw new Error(data.error);
       } else {
         localStorage.setItem("_id", data._id);
@@ -93,7 +93,7 @@ function LoginForm() {
             
           ]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
         <Form.Item
           wrapperCol={{

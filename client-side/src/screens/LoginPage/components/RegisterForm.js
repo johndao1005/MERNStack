@@ -71,7 +71,7 @@ function RegisterForm() {
             {
               required: true,
               message: "Please input your username!",
-            },{type:"email", message: "Please enter correct email address"}
+            }
           ]}
         >
           <Input />
@@ -96,10 +96,12 @@ function RegisterForm() {
               required: true,
               message: "Please input your password!",
             },
-            { min: 8, message: "Password must be minimum 8 characters." },
+            { min: 8,
+              message: "Password must be minimum 8 characters." 
+            },
           ]}
         >
-          <Input />
+          <Input.Password />
         </Form.Item>
         <Form.Item
           wrapperCol={{
