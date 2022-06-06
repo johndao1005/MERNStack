@@ -2,42 +2,22 @@ import React, { useState } from "react";
 import { Button, Card, Col, Form, Input, Row, Space, Typography } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { checkToken } from "../../../store/action/token.action";
 const { Title } = Typography;
 
 function Hero() {
   const [token, setToken] = useState("");
-  const [error, setError] = useState(null);
   const navigator = useNavigate();
-  
-  const handleSubmitToken = async (e) => {
-    e.preventDefault();
+  const [loading, setLoading] = useState(false)
+  const tokenReducer = useSelector((state) => state.tokenReducer);
+  const { error } = tokenReducer;
+  const dispatch = useDispatch();
+  const handleSubmitToken = async () => {
     //check empty field and remove current error
-    if (token.trim() === "") {
-      setError("Please enter you voucher number");
-      return;
-    } else {
-      setError("");
-    }
-    try {
-      // allow CORS request to go throuhg
-      const config = {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      };
-      // using post request to check if the token is used
-      const response = await axios.post(
-        `http://localhost:5000/transaction/${token}`,
-        config
-      );
-
-      if (response.data.message === "The voucher is claimed or not exist") {
-        setError(response.data.message);
-      } else {
-        localStorage.setItem("token", token);
-        navigator("/packages", { replace: true });
-      }
-    } catch (e) {
-      setError(e.message);
-    }
+    setLoading(true);
+    dispatch(checkToken(token, (check) => check?navigator("/package", { replace: true }): setLoading(false)));
+   
   };
 
   return (
@@ -79,7 +59,7 @@ function Hero() {
                   placeholder="Enter Your Token"
                   onChange={(e) => setToken(e.target.value)}
                 />
-                {error && <span style={{color: "red"}}>{error}</span>}
+                {error && <p style={{color: "red"}}>{error}</p>}
                 <div className="text-muted">
                   Please reframe from sharing your voucher code as it can
                   only be claimed once

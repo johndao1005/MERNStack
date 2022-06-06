@@ -30,24 +30,8 @@ function MemberScreen({ collapsed }) {
     }
   };
 
-  const renderSideBar = () => {
-    return (
-      <Sider
-        id="side-nav"
-        style={{ backgroundColor: "#1791AA" }}
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-      >
-        <div className="logo" />
-        <Menu
-          onClick={onClick}
-          selectedKeys={[current]}
-          style={{ backgroundColor: "#1791AA" }}
-          theme="dark"
-          mode="inline"
-          items={[
-            {
+  const items=[
+    {
               key: "orderHistory",
               icon: (
                 <UnorderedListOutlined
@@ -72,6 +56,26 @@ function MemberScreen({ collapsed }) {
               ),
               label: "User Details",
             },
+  ]
+
+  const renderSideBar = () => {
+    return (
+      <Sider
+        id="side-nav"
+        style={{ backgroundColor: "#1791AA" }}
+        trigger={null}
+        collapsible
+        collapsed={collapsed}
+      >
+        <div className="logo" />
+        <Menu
+          onClick={onClick}
+          selectedKeys={[current]}
+          style={{ backgroundColor: "#1791AA" }}
+          theme="dark"
+          mode="inline"
+          items={[
+            
           ]}
         />
       </Sider>

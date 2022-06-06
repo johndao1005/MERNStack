@@ -1,13 +1,11 @@
 
 const tokenData = [
-    {token:"hellosd123123"},
-    {token:"hlo12sd3123"},
-    {token:"heos3daf23123"},
-    {token:"hsllosd123123"},
-    {token:"helld123123"},
-    {token:"helssd123123"},
-    {token:"hgllosd123123"},
-    {token:"hsdllosd123123"},
+    {token:"123"},
+    {token:"321"},
+    {token:"231"},
+    {token:"411"},
+    {token:"311"},
+    {token:"222"},
 ];
 
 module.exports = tokenData;

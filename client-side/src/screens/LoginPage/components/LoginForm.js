@@ -1,67 +1,33 @@
-import axios from "axios";
 import React, { useState } from "react";
-import { Form, Input, Button, Col, Row,  Typography } from "antd";
+import { Form, Input, Button, Col, Row, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../../store/action/authenticate.action";
 
-const {Title} = Typography
+const { Title } = Typography;
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, seterror] = useState(null);
   const [loading, setLoading] = useState(false);
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo,error } = userLogin;
+  const dispatch = useDispatch();
 
-  let navigator = useNavigate();
-
-  const loginHandler = async (e) => {
-    e.preventDefault();
-    if (email.trim().length === 0 || password.trim().length === 0) {
-      seterror("Please enter email and/or password to login");
-      return;
-    } else {
-      setEmail("");
-    }
-    try {
-      const config = {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      };
-      const { data } = await axios.post(
-        `http://localhost:5000/user/login/`,
-        { email, password },
-        config
-      );
-      console.log(data);
-      if (data.error || data) {
-        throw new Error(data.error);
-      } else {
-        localStorage.setItem("_id", data._id);
-        navigator("/user", { replace: true });
-      }
-    } catch (e) {
-      seterror(e.message);
-    }
-  };
-
-  const compareToFirstPassword = (rule, value, callback) => {
-    const { form } = this.props;
-    if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
-    } else {
-      callback();
-    }
+  const loginHandler = async () => {
+    setLoading(true);
+    dispatch(login(email, password, () => setLoading(false)));
+    console.log(error);
   };
 
   return (
     <>
-      <Title style={{marginTop:10, marginBottom: 19}} level={3}>Login</Title>
+      <Title style={{ marginTop: 10, marginBottom: 19 }} level={3}>
+        Login
+      </Title>
       <Form
+        layout="vertical"
         name="login"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
         initialValues={{
           remember: true,
         }}
@@ -75,11 +41,11 @@ function LoginForm() {
             {
               required: true,
               message: "Please input your email!",
-            },{type:"email", message: "Please enter correct email address"},
-            
+            },
+            { type: "email", message: "Please enter correct email address" },
           ]}
         >
-          <Input />
+          <Input value={email} onChange={(e) => setEmail(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -90,10 +56,12 @@ function LoginForm() {
               message: "Please input your password!",
             },
             { min: 8, message: "Password must be minimum 8 characters." },
-            
           ]}
         >
-          <Input.Password />
+          <Input.Password
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Form.Item>
         <Form.Item
           wrapperCol={{
@@ -101,11 +69,17 @@ function LoginForm() {
             span: 15,
           }}
         >
-          <Button style={{minWidth: 350}} type="primary" htmlType="submit">
+          <Button
+            style={{ minWidth: 330, marginTop: 10 }}
+            loading={loading}
+            type="primary"
+            htmlType="submit"
+          >
             Submit
           </Button>
         </Form.Item>
       </Form>
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <Row justify="center" className="my-3">
         <Col>New User ? Please go to Register tab</Col>
       </Row>

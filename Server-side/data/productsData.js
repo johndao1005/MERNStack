@@ -1,24 +1,119 @@
 const productsData = [
-    {
-        name: "bigPack",
-        price: 123.1
-    },
-    {
-        name: "smallPack",
-        price: 123.1
-    },
-    {
-        name: "aPack",
-        price: 123.1
-    },
-    {
-        name: "aaPack",
-        price: 123.1
-    },
-    {
-        name: "twoPack",
-        price: 123.1
-    },
+  {
+    name: "bigPack",
+    quantity: 123,
+    items: [
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        
+      ],
+  },
+  {
+    name: "smallPack",
+    quantity: 123,
+    items: [
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        
+      ],
+  },
+  {
+    name: "aPack",
+    quantity: 123,
+    items: [
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        
+      ],
+  },
+  {
+    name: "aaPack",
+    quantity: 123,
+    items: [
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        {
+          name: "cucumber",
+          quantity: 2,
+        },
+        
+      ],
+  },
+  {
+    name: "twoPack",
+    quantity: 123,
+    items: [
+      {
+        name: "cucumber",
+        quantity: 2,
+      },
+      {
+        name: "cucumber",
+        quantity: 2,
+      },
+      {
+        name: "cucumber",
+        quantity: 2,
+      },
+      {
+        name: "cucumber",
+        quantity: 2,
+      },
+      
+    ],
+  },
 ];
 
 module.exports = productsData;

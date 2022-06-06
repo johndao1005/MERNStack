@@ -2,79 +2,50 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Form, Input, Button, Col, Row, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
+import { register } from "../../../store/action/authenticate.action";
+import { useDispatch, useSelector } from "react-redux";
 
-const {Title} = Typography
+const { Title } = Typography;
 
 function RegisterForm() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [name, setName] = useState('')
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(false)
-    let navigator = useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(false);
 
-    const registerHandler = async () => {
-        setLoading(true)
-        if (name.trim().length === 0 ||
-            email.trim().length === 0 ||
-            password.trim().length === 0) {
-            setError("Please enter all the information")
-        } else {
-            setError('')
-        }
-        try {
-            const config = {
-                headers: { 'Access-Control-Allow-Origin': '*' },
-            }
-            const { data } = await axios.post(
-                `http://localhost:5000/user/register/`,
-                {
-                    name,
-                    email,
-                    password
-                },
-                config
-            )
-            if (data.error) {
-                throw new Error(data.error)
-            } else{
-                localStorage.setItem('_id',data._id)
-                setLoading(false)
-                navigator('/user', { replace: true })
-            }
-        } catch (e) {
-            setError(e.message)
-            setLoading(false)
-        }
-    }
-    return (
-        <>
-      <Title style={{marginTop:10, marginBottom: 19}} level={3}>Register</Title>
+  const userRegister = useSelector((state) => state.userRegister);
+  const { userInfo, error } = userRegister;
+  const dispatch = useDispatch();
+
+  const registerHandler = async () => {
+    setLoading(true);
+    dispatch(register(name, email, password, () => setLoading(false)));
+  };
+  return (
+    <>
+      <Title style={{ marginTop: 10, marginBottom: 19 }} level={3}>
+        Register
+      </Title>
       <Form
-        name="login"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
+        name="register"
+        layout="vertical"
         initialValues={{
           remember: true,
         }}
         onFinish={registerHandler}
         autoComplete="off"
       >
-          <Form.Item
+        <Form.Item
           label="Username"
           name="username"
           rules={[
             {
               required: true,
               message: "Please input your username!",
-            }
+            },
           ]}
         >
-          <Input />
+          <Input value={name} onChange={(e) => setName(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="Email Address"
@@ -82,11 +53,12 @@ function RegisterForm() {
           rules={[
             {
               required: true,
-              message: "Please input your username!",
-            },{type:"email", message: "Please enter correct email address"}
+              message: "Please input your email address!",
+            },
+            { type: "email", message: "Please enter correct email address" },
           ]}
         >
-          <Input />
+          <Input value={email} onChange={(e) => setEmail(e.target.value)} />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -96,12 +68,13 @@ function RegisterForm() {
               required: true,
               message: "Please input your password!",
             },
-            { min: 8,
-              message: "Password must be minimum 8 characters." 
-            },
+            { min: 8, message: "Password must be minimum 8 characters." },
           ]}
         >
-          <Input.Password />
+          <Input.Password
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </Form.Item>
         <Form.Item
           wrapperCol={{
@@ -109,16 +82,19 @@ function RegisterForm() {
             span: 15,
           }}
         >
-          <Button loading={loading} style={{minWidth: 350}} type="primary" htmlType="submit">
+          <Button
+            loading={loading}
+            style={{ minWidth: 330, marginTop: 10 }}
+            type="primary"
+            htmlType="submit"
+          >
             Submit
           </Button>
         </Form.Item>
       </Form>
-      <Row justify="center" className="my-3">
-        <Col>New User ? Please go to Register tab</Col>
-      </Row>
+      {error && <p style={{ color: "red" }}>{error}</p>}
     </>
-    )
+  );
 }
 
-export default RegisterForm
+export default RegisterForm;

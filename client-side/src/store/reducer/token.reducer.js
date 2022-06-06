@@ -1,60 +1,24 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAILED,
-    LOGIN_LOADING,
-    LOGIN_SUCCESS,
-    LOGIN_FAILED,
-    LOGOUT_SUCCESS,
-    GET_LOGIN_LOCK_SUCCESS,
-  } from '../string';
+    TOKEN_CHECK_REQUEST,
+    TOKEN_CHECK_SUCCESS,
+    TOKEN_CHECK_FAIL,
+    TOKEN_CLAM_SUCCESS,
+    TOKEN_CLAIM_FAIL,
+  } from '../constants/tokenConstants'
   
-  // Tạo model
-  const loginModel = {
-    error: '',
-    registerError: '',
-    locked: false,
-  };
-  
-  // Phương thức thay đổi dữ liệu của model
-  export default (state = loginModel, action) => {
+  export const tokenReducer = (state = {}, action) => {
     switch (action.type) {
-      case LOGIN_LOADING:
-        return {
-          ...state,
-          error: '',
-        };
-      case LOGIN_SUCCESS:
-        return {
-          ...state,
-          error: '',
-        };
-      case LOGIN_FAILED:
-        return {
-          ...state,
-          error: action.payload,
-        };
-      case LOGOUT_SUCCESS:
-        return {
-          ...state,
-          auth: null,
-        };
-      case REGISTER_SUCCESS:
-        return {
-          ...state,
-          error: '',
-        };
-      case REGISTER_FAILED:
-        return {
-          ...state,
-          registerError: action.payload,
-        };
-      case GET_LOGIN_LOCK_SUCCESS:
-        return {
-          ...state,
-          locked: action.payload,
-        };
-      default:
-        return state;
+        case TOKEN_CHECK_REQUEST:
+            return {  error: null}
+        case TOKEN_CHECK_SUCCESS:
+            return {  token: action.payload }
+        case TOKEN_CHECK_FAIL:
+            return {  error : action.payload }
+        case TOKEN_CLAM_SUCCESS:
+            return {success : true}
+            case TOKEN_CLAIM_FAIL:
+            return {error: action.payload}
+        default:
+            return state
     }
-  };
-  
+  }

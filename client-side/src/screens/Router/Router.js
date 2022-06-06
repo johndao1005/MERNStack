@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import LandingPage from "../LandingPage/LandingPage";
 import LoginPage from "../LoginPage/LoginPage";
 import { useSelector } from "react-redux";
 import MainLayout from "./Main";
 import DashBoardLayout from "./DashBoard";
-
+import NotFound from "./NotFound";
+import Package from "../Package/Package";
+import DeliveryForm from "../DeliveryForm/DeliveryForm";
+import UserDetail from "../UserDetails/UserDetail";
+import {adminItems, donatorItems, memberItems} from './sideBarItems'
 function Router() {
-  const userLogin = useSelector((state) => state.authenticationReducer);
+  const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
   if (!userInfo) {
     return (
@@ -16,6 +20,10 @@ function Router() {
           <Routes>
             <Route path="/" element={<LandingPage />} exact={true} />
             <Route path="/login" element={<LoginPage />} exact={true} />
+            <Route path="/package" element={<Package />} exact={true} />
+            <Route path="/delivery" element={<DeliveryForm />} exact={true} />
+            <Route path="*" element={<Navigate to="/404" />} />
+            <Route path="/404" element={<NotFound />} />
           </Routes>
         </MainLayout>
       </BrowserRouter>
@@ -24,28 +32,30 @@ function Router() {
     switch (userInfo.userType) {
       case "donator":
         return (
-          <DashBoardLayout userInfo={userInfo}>
-            <BrowserRouter>
+          <BrowserRouter>
+            <DashBoardLayout userInfo={userInfo} items={donatorItems}>
               <Routes>
                 <Route
                   path="/donator/orderList"
-                  element={<LandingPage />}
+                  element={<UserDetail />}
                   exact={true}
                 />
                 <Route
                   path="/donator/createOrder"
-                  element={<LoginPage />}
+                  element={<UserDetail />}
                   exact={true}
                 />
-                <Route path="/userInfo" element={<LoginPage />} exact={true} />
+                <Route path="/userInfo" element={<UserDetail />} exact={true} />
+                <Route path="*" element={<Navigate to="/userInfo" />} />
+                <Route path="/404" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
-          </DashBoardLayout>
+            </DashBoardLayout>
+          </BrowserRouter>
         );
       case "admin":
         return (
-          <DashBoardLayout userInfo={userInfo}>
-            <BrowserRouter>
+          <BrowserRouter>
+            <DashBoardLayout userInfo={userInfo} items={adminItems}>
               <Routes>
                 <Route
                   path="/admin/orderList"
@@ -62,15 +72,17 @@ function Router() {
                   element={<LoginPage />}
                   exact={true}
                 />
-                <Route path="/userInfo" element={<LoginPage />} exact={true} />
+                <Route path="/userInfo" element={<UserDetail />} exact={true} />
+                <Route path="*" element={<Navigate to="/userInfo" />} />
+                <Route path="/404" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
-          </DashBoardLayout>
+            </DashBoardLayout>
+          </BrowserRouter>
         );
       default:
         return (
-          <DashBoardLayout userInfo={userInfo}>
-            <BrowserRouter>
+          <BrowserRouter>
+            <DashBoardLayout userInfo={userInfo} items={memberItems}>
               <Routes>
                 <Route
                   path="/donator/orderList"
@@ -82,10 +94,12 @@ function Router() {
                   element={<LoginPage />}
                   exact={true}
                 />
-                <Route path="/userInfo" element={<LoginPage />} exact={true} />
+                <Route path="/userInfo" element={<UserDetail />} exact={true} />
+                <Route path="*" element={<Navigate to="/userInfo" />} />
+                <Route path="/404" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
-          </DashBoardLayout>
+            </DashBoardLayout>
+          </BrowserRouter>
         );
     }
   }

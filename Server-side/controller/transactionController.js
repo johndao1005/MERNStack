@@ -10,11 +10,9 @@ const getPackageList = asyncHandler(async (req, res) => {
         res.status(201).json({
             packages
         })
-    } catch {
-        res.json({
-            packages
-        })
-    }
+    } catch (e) {
+        res.json({ error: e.message });
+      }
 })
 
 const checkToken = asyncHandler(async (req, res) => {
@@ -22,19 +20,15 @@ const checkToken = asyncHandler(async (req, res) => {
     try {
         const token = await Token.findOne({ token: req.params.id })
         if (token === null || (token && token.used == true)) {
-            res.json({
-                message: 'The voucher is claimed or not exist'
-            })
+            throw new Error("'The voucher is claimed or not exist'")
         } else {
             res.json({
                 message: "Token is available"
             })
         }
-    } catch (error) {
-        res.json({
-            error
-        })
-    }
+    } catch (e) {
+        res.json({ error: e.message });
+      }
 })
 
 const confirmTransaction = asyncHandler(async (req, res) => {

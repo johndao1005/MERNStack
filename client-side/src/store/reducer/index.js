@@ -1,9 +1,23 @@
 import {combineReducers} from 'redux';
-import authenticationReducer from './authentication.reducer';
-import tokenReducer from './token.reducer';
+import {userLoginReducer,
+    userRegisterReducer,
+    userDetailsReducer,
+    userUpdateProfileReducer,
+    userListReducer,
+    userDeleteReducer,
+    userUpdateReducer,
+} from './authentication.reducer';
+import {
+    tokenReducer
+} from './token.reducer';
 
-// Thiết lập object state với các đối tượng là  model tương tứng
 export default combineReducers({
-    authenticationReducer,
-    tokenReducer  
+    userLogin :userLoginReducer,
+    userRegister :  userRegisterReducer,
+    userDetails :userDetailsReducer,
+    userUpdateProfile :userUpdateProfileReducer,
+    userList :userListReducer,
+    userDelete :userDeleteReducer,
+    userUpdate : userUpdateReducer,
+    tokenReducer: tokenReducer,
 });
