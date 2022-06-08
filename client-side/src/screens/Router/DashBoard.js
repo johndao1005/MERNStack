@@ -18,8 +18,6 @@ function DashBoardLayout(props) {
   const [collapsed, setCollapsed] = useState(false);
   let navigator = useNavigate();
   const dispatch = useDispatch();
-  console.log(props.userInfo);
-
   const handleLogout = () => {
     dispatch(logout())
     navigator("/", { replace: true });
@@ -60,7 +58,7 @@ function DashBoardLayout(props) {
 
               <h3 style={{ fontSize: 18, color: "whitesmoke", marginLeft: 20 }}>
                 {" "}
-                Kai Rescue
+                Kai Rescue Donator
               </h3>
             </Row>
           </Col>
@@ -122,11 +120,6 @@ function DashBoardLayout(props) {
             {props.children}
           </Content>
         </Layout>
-        {/* {member === true ? (
-          <MemberScreen collapsed={collapsed} />
-        ) : (
-          <DonatorScreen collapsed={collapsed} />
-        )} */}
       </Content>
     </Layout>
   );

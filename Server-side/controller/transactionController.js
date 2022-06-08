@@ -38,15 +38,18 @@ const confirmTransaction = asyncHandler(async (req, res) => {
             throw new Error('The voucher is claimed or not exist')
         }
 
-        //const { productID, address } = req.body
-        await Token.updateOne({ "_id": token._id }, { used: true })
-        // const newTransaction = await Transaction.create({
-        //     productID,
-        //     tokenID: token.token,
-        //     address
-        // })
+        const { productID, address, email ,phone} = req.body
+        // await Token.updateOne({ "_id": token._id }, { used: true })
+        const newTransaction = await Transaction.create({
+            productID,
+            tokenID: token.token,
+            address,
+            email,
+            phone,
+        })
         res.status(201).json({
-            message: `Transaction  complete`
+            message: `Transaction  complete`,
+            transaction : newTransaction
         })
 
     } catch (error) {

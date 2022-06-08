@@ -7,6 +7,7 @@ const { Meta } = Card;
 const Package = () => {
   const [visible, setVisible] = useState(false);
   const [packages, setPackages] = useState([]);
+  const [singlePackage, setSinglePackage] = useState(null)
   const navigate = useNavigate();
   // using get request to get all the available data in package collection
   const getPackets = async () => {
@@ -32,35 +33,48 @@ const Package = () => {
 
   const handleOk = () => {
     setVisible(false);
-    navigate("/delivery");
+    navigate("/delivery",{state:{package:singlePackage}});
     //set product info into state
   };
 
-  const handleSelect = async () => {
+  const handleSelect = async (product) => {
+    setSinglePackage(product);
     setVisible(true);
   };
+
+  const label = [{
+    name: "Items",
+    quantity: "Quanitty"
+  }]
 
   const packageList = () => {
     return (
       <Row>
-        {packages.map((product, index) => (
+        {packages.map((product, index) =>{
+          return (
           <Col key={product._id} xs={24} sm={12} md={8} lg={7} xl={6}>
             <Card
-              onClick={() => handleSelect(product._id)}
+              onClick={() => handleSelect(product)}
               hoverable
               style={{
                 width: "80%",
                 margin: "10px auto",
-              }}
-            >
-              <Meta title="Card title" description="This is the description" />
+              }}>
+              <Meta title={product?.name} description={product?.description} />
               <List
-                dataSource={["sdaf", "sdfa"]} //{product.items}
-                renderItem={(item) => <List.Item>{item}</List.Item>}
+                dataSource={label.concat(product?.items)}
+                renderItem={(item) => <List.Item>
+                  <div>
+                    {item.name}
+                    </div>
+                    <div>
+                     {item.quantity}
+                    </div>
+                     </List.Item>}
               />
             </Card>
           </Col>
-        ))}
+        )})}
       </Row>
     );
   };
@@ -77,11 +91,11 @@ const Package = () => {
             Close
           </Button>,
           <Button key="confirm" type="primary" onClick={handleOk}>
-            Confirm
+            Confirm package
           </Button>,
         ]}
       >
-        <p>Do you confirm to select the </p>
+        <p>Do you confirm to select the {singlePackage?.name} to checkout?</p>
       </Modal>
     );
   };

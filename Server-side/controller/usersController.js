@@ -25,6 +25,7 @@ const registerUser = asyncHandler(async (req, res) => {
         _id: newUser._id,
         name: newUser.name,
         email: newUser.email,
+        userType: newUser.userType
       });
     } else {
       throw new Error("Invalid user data");
@@ -44,6 +45,7 @@ const userDetail = asyncHandler(async (req, res) => {
       email: user.email,
       address: user.address,
       phone: user.phone,
+      userType: user.userType
     });
   } else {
     res.status(404);
@@ -66,10 +68,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
-      email: updatedUser.email,
       address: updatedUser.email,
       email: updatedUser.email,
       phone: updatedUser.phone,
+      
     });
   } else {
     res.status(404);
@@ -88,6 +90,7 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        userType: user.userType
       });
     } else {
       throw new Error("Invalid email or password");
