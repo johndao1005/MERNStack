@@ -13,9 +13,9 @@ function App() {
     ? JSON.parse(localStorage.getItem("token"))
     : null;
   const initialState = {
-    // token: {
-    //     tokenInfo: tokenInfoFromStorage,
-    // },
+    tokenInfo: {
+        token: tokenInfoFromStorage,
+    },
     userLogin: { userInfo: userInfoFromStorage },
   };
   const store = createStore(

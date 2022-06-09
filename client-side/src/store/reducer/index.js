@@ -19,5 +19,5 @@ export default combineReducers({
     userList :userListReducer,
     userDelete :userDeleteReducer,
     userUpdate : userUpdateReducer,
-    tokenReducer: tokenReducer,
+    tokenInfo: tokenReducer,
 });

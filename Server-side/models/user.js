@@ -1,43 +1,44 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
-const userSchema = new Schema({
+const userSchema = new Schema(
+  {
     name: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
-    userType :{
-        type: String,
-        required: true,
-        default: "donator"
+    userType: {
+      type: String,
+      required: true,
+      default: "donator",
     },
     phone: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
     },
     address: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     DOB: {
-        type: String,
-        required: false,
+      type: String,
+      required: false,
     },
     password: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
-}, {
-    timestamp: true,//this will check when the user is created and updated
-});
-
-
+  },
+  {
+    timestamp: true, //this will check when the user is created and updated
+  }
+);
 
 // // start an action below before save, update user with pre('save',)
 // userSchema.pre('save', async function (next) {
@@ -57,4 +58,4 @@ const userSchema = new Schema({
 // }
 
 const User = mongoose.model("User", userSchema);
-module.exports = { User }
+module.exports = { User };

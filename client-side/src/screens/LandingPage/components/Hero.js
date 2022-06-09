@@ -10,14 +10,13 @@ function Hero() {
   const [token, setToken] = useState("");
   const navigator = useNavigate();
   const [loading, setLoading] = useState(false)
-  const tokenReducer = useSelector((state) => state.tokenReducer);
-  const { error } = tokenReducer;
+  const tokenReducer = useSelector((state) => state.tokenInfo);
+  const { checkError, } = tokenReducer;
   const dispatch = useDispatch();
   const handleSubmitToken = async () => {
     //check empty field and remove current error
     setLoading(true);
-    dispatch(checkToken(token, (check) => check?navigator("/package", { replace: true }): setLoading(false)));
-   
+    dispatch(checkToken(token, (check) => check ? navigator("/package", { replace: true }): setLoading(false)));
   };
 
   return (
@@ -59,7 +58,7 @@ function Hero() {
                   placeholder="Enter Your Token"
                   onChange={(e) => setToken(e.target.value)}
                 />
-                {error && <p style={{color: "red"}}>{error}</p>}
+                {checkError && <p style={{color: "red"}}>{checkError}</p>}
                 <div className="text-muted">
                   Please reframe from sharing your voucher code as it can
                   only be claimed once
@@ -72,13 +71,12 @@ function Hero() {
                   Claim your voucher
                 </Button>
               </Form>
-              <Title level={4}>Donators and Volunteers</Title>
-              <span>
-                Are you looking to be a part of the team
-                <br /> or contribute to the community ? Enter bellow
-              </span>
+              <Title level={4}>Donators </Title>
+              <div>
+                Do you want to contribute to the community ? Enter bellow
+              </div>
               <Button
-                style={{ maxWidth: 300, marginTop: 10, marginBottom: 10 }}
+                style={{ maxWidth: 300, marginTop: 5, marginBottom: 10 }}
                 type={"primary"}
                 onClick={() => navigator("/login")}
               >

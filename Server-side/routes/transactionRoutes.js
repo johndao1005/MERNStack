@@ -12,8 +12,9 @@ router.get('/', getPackageList);
 router.post('/create', createToken);
 
 router
-  .route('/:id')
-  .post( checkToken)
-  .get( confirmTransaction);
+  .post('/token/:id',checkToken)
+
+router
+  .post('/delivery', confirmTransaction);
 
 module.exports = router

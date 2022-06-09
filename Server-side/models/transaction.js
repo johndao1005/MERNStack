@@ -3,21 +3,25 @@ const Schema = mongoose.Schema;
 
 const transactionSchema = new Schema(
   {
+    receiverName: {
+      type: String,
+      required: false,
+    },
     productID: {
       type: String,
-      required: true,
+      required: false,
     },
     tokenID: {
       type: String,
-      required: true,
+      required: false,
     },
     address: {
       type: String,
-      required: true,
+      required: false,
     },
     email: {
       type: String,
-      required: true,
+      required: false,
     },
     phone: {
       type: String,
