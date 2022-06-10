@@ -82,9 +82,30 @@ const createToken = asyncHandler(async (req, res) => {
   }
 });
 
+const createPackage = asyncHandler(async (req, res) => {
+  try {
+    //get the current Token List to compare in order to make a new one
+    // const currentTokenList = await Token.find({})
+    const {name, description, quantity, items} = req.body
+    const newPackage = Product.create({
+      name,
+      description, 
+      quantity, 
+      items
+    })
+
+    res.status(200).json({
+      message: "new package"
+    });
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 module.exports = {
   getPackageList,
   confirmTransaction,
   checkToken,
   createToken,
+  createPackage
 };

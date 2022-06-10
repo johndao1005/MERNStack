@@ -58,7 +58,7 @@ function DashBoardLayout(props) {
 
               <h3 style={{ fontSize: 18, color: "whitesmoke", marginLeft: 20 }}>
                 {" "}
-                Kai Rescue Donator
+                Kai Rescue
               </h3>
             </Row>
           </Col>

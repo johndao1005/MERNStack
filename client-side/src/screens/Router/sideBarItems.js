@@ -12,17 +12,17 @@ export const adminItems = [
     icon: (
       <UnorderedListOutlined style={{ fontSize: 24, color: "whitesmoke" }} />
     ),
-    label: <Link to="/">Order History</Link>,
+    label: <Link to="/admin/orderList">Order History</Link>,
   },
   {
     key: "newOrder",
     icon: <PlusCircleOutlined style={{ fontSize: 24, color: "whitesmoke" }} />,
-    label: <Link to="/">New Order</Link>,
+    label: <Link to="/admin/orderList">New Order</Link>,
   },
   {
     key: "userDetails",
     icon: <UserOutlined style={{ fontSize: 24, color: "whitesmoke" }} />,
-    label: <Link to="/">Order History</Link>,
+    label: <Link to="/userInfo">Order History</Link>,
   },
 ];
 
@@ -37,31 +37,31 @@ export const memberItems = [
     icon: (
       <UnorderedListOutlined style={{ fontSize: 24, color: "whitesmoke" }} />
     ),
-    label: <Link to="/">Order History</Link>,
+    label: <Link to="/member/orderList">Order History</Link>,
   },
   {
     key: "newOrder",
     icon: <PlusCircleOutlined style={{ fontSize: 24, color: "whitesmoke" }} />,
-    label: <Link to="/">New Order</Link>,
+    label: <Link to="/member/createOrder">New Order</Link>,
   },
 ];
 
 export const donatorItems = [
-  {
-    key: "orderHistory",
-    icon: (
-      <UnorderedListOutlined style={{ fontSize: 24, color: "whitesmoke" }} />
-    ),
-    label: <Link to="/">Order History</Link>,
-  },
+  // {
+  //   key: "orderHistory",
+  //   icon: (
+  //     <UnorderedListOutlined style={{ fontSize: 24, color: "whitesmoke" }} />
+  //   ),
+  //   label: <Link to="/donator/orderList">Order History</Link>,
+  // },
   {
     key: "newOrder",
     icon: <PlusCircleOutlined style={{ fontSize: 24, color: "whitesmoke" }} />,
-    label: <Link to="/">Order History</Link>,
+    label: <Link to="/donator/createOrder">New Item</Link>,
   },
   {
     key: "userDetails",
     icon: <UserOutlined style={{ fontSize: 24, color: "whitesmoke" }} />,
-    label: <Link to="/">Order History</Link>,
+    label: <Link to="/userInfo">User Details</Link>,
   },
 ];

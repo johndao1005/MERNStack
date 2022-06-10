@@ -68,10 +68,10 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
-      address: updatedUser.email,
       email: updatedUser.email,
+      address: updatedUser.address,
       phone: updatedUser.phone,
-      
+      userType: updatedUser.userType
     });
   } else {
     res.status(404);
@@ -90,7 +90,9 @@ const authUser = asyncHandler(async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
-        userType: user.userType
+        userType: user.userType,
+      address: user.address,
+      phone: user.phone,
       });
     } else {
       throw new Error("Invalid email or password");

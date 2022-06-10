@@ -4,38 +4,10 @@ import React, { useRef, useState } from "react";
 const { Content, Sider } = Layout;
 
 function SideBar({ items, collapsed }) {
-  const [current, setCurrent] = useState("newOrder");
+  const [current, setCurrent] = useState("userDetails");
   const onClick = (e) => {
     setCurrent(e.key);
   };
-
-//   const items=[
-//     {
-//               key: "orderHistory",
-//               icon: (
-//                 <UnorderedListOutlined
-//                   style={{ fontSize: 24, color: "whitesmoke" }}
-//                 />
-//               ),
-//               label: "Order History",
-//             },
-//             {
-//               key: "newOrder",
-//               icon: (
-//                 <PlusCircleOutlined
-//                   style={{ fontSize: 24, color: "whitesmoke" }}
-//                 />
-//               ),
-//               label: "Create New Order",
-//             },
-//             {
-//               key: "userDetails",
-//               icon: (
-//                 <UserOutlined style={{ fontSize: 24, color: "whitesmoke" }} />
-//               ),
-//               label: "User Details",
-//             },
-//   ]
 
  
     return (

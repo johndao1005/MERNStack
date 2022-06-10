@@ -15,6 +15,6 @@ router.post('/register', registerUser);
 router
   .route('/profile/:id')
   .get( userDetail)
-  .put( updateUserProfile);
+  .post( updateUserProfile);
 
 module.exports = router

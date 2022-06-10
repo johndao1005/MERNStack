@@ -51,6 +51,9 @@ const Package = () => {
     return (
       <Row>
         {packages.map((product, index) =>{
+          if(product?.quantity < 1){
+            return null
+          }
           return (
           <Col key={product._id} xs={24} sm={12} md={8} lg={7} xl={6}>
             <Card

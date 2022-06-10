@@ -17,7 +17,6 @@ import {
   USER_LIST_FAIL,
   USER_LIST_SUCCESS,
   USER_LIST_REQUEST,
-  USER_LIST_RESET,
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
@@ -168,18 +167,14 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       type: USER_UPDATE_PROFILE_REQUEST,
     })
 
-    const {
-      userLogin: { userInfo },
-    } = getState()
-
     const config = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
       },
     }
-
-    const { data } = await axios.put(`/user/profile`, user, config)
+    
+    const { data } = await axios.post(`/user/profile/${user._id}`, user, config)
+    console.log(data)
 
     dispatch({
       type: USER_UPDATE_PROFILE_SUCCESS,

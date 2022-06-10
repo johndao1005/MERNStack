@@ -4,7 +4,8 @@ const {
     getPackageList,
     confirmTransaction,
     checkToken,
-    createToken
+    createToken,
+    createPackage
 } = require("../controller/transactionController")
 
 router.get('/', getPackageList);
@@ -16,5 +17,7 @@ router
 
 router
   .post('/delivery', confirmTransaction);
+
+router.post('/package', createPackage)
 
 module.exports = router

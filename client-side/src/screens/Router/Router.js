@@ -10,6 +10,7 @@ import Package from "../Package/Package";
 import DeliveryForm from "../DeliveryForm/DeliveryForm";
 import UserDetail from "../UserDetails/UserDetail";
 import {adminItems, donatorItems, memberItems} from './sideBarItems'
+import NewPackage from "../NewPackage/NewPackage";
 function Router() {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -29,25 +30,26 @@ function Router() {
       </BrowserRouter>
     );
   } else if (userInfo) {
-    switch (userInfo.userType) {
-      case "donator":
+    console.log(userInfo)
+    switch (userInfo?.userType) {
+      case "member":
         return (
+          
           <BrowserRouter>
-            <DashBoardLayout userInfo={userInfo} items={donatorItems}>
+            <DashBoardLayout userInfo={userInfo} items={memberItems}>
               <Routes>
                 <Route
-                  path="/donator/orderList"
-                  element={<UserDetail />}
+                  path="/member/orderList"
+                  element={<LandingPage />}
                   exact={true}
                 />
                 <Route
-                  path="/donator/createOrder"
-                  element={<UserDetail />}
+                  path="/member/createOrder"
+                  element={<LoginPage />}
                   exact={true}
                 />
                 <Route path="/userInfo" element={<UserDetail />} exact={true} />
-                <Route path="*" element={<Navigate to="/userInfo" />} />
-                <Route path="/404" element={<NotFound />} />
+                <Route path="*" element={<Navigate to="/userInfo" />} /> 
               </Routes>
             </DashBoardLayout>
           </BrowserRouter>
@@ -82,21 +84,20 @@ function Router() {
       default:
         return (
           <BrowserRouter>
-            <DashBoardLayout userInfo={userInfo} items={memberItems}>
+            <DashBoardLayout userInfo={userInfo} items={donatorItems}>
               <Routes>
                 <Route
                   path="/donator/orderList"
-                  element={<LandingPage />}
+                  element={<UserDetail />}
                   exact={true}
                 />
                 <Route
                   path="/donator/createOrder"
-                  element={<LoginPage />}
+                  element={<NewPackage />}
                   exact={true}
                 />
                 <Route path="/userInfo" element={<UserDetail />} exact={true} />
                 <Route path="*" element={<Navigate to="/userInfo" />} />
-                <Route path="/404" element={<NotFound />} />
               </Routes>
             </DashBoardLayout>
           </BrowserRouter>

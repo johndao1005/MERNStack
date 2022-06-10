@@ -10,6 +10,9 @@ import {userLoginReducer,
 import {
     tokenReducer
 } from './token.reducer';
+import {
+    packageReducer
+} from './package.reducer';
 
 export default combineReducers({
     userLogin :userLoginReducer,
@@ -20,4 +23,5 @@ export default combineReducers({
     userDelete :userDeleteReducer,
     userUpdate : userUpdateReducer,
     tokenInfo: tokenReducer,
+    packageReducer : packageReducer
 });
